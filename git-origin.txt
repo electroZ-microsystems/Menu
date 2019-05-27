@@ -1,0 +1,3 @@
+git remote set-url origin https://github.com/electroZ-microsystems/Menu.git
+git remote set-url origin https://github.com/codemakeshare/Menu.git
+ 
