@@ -96,6 +96,16 @@ void Menu::goPrevious() {
     if (selectedItem<scrollOffset) scrollOffset=selectedItem;
   };
 
+void Menu::goLast() {
+    selectedItem=maxCount-1;
+    if (selectedItem-scrollOffset>3) scrollOffset=selectedItem-3;
+  };
+
+void Menu::goFirst() {
+    selectedItem=0;
+    if (selectedItem<scrollOffset) scrollOffset=selectedItem;
+  };
+
 
 MenuItem* Menu::navigateMenu(menu_event_t event) {
     currentSubmenu->redraw=false; 
@@ -107,9 +117,19 @@ MenuItem* Menu::navigateMenu(menu_event_t event) {
         currentSubmenu->redraw=true; 
         switch(event) {
             case MENU_UP:
-                currentSubmenu->goPrevious();
+                #ifdef ROLLOVER 
+                if (currentSubmenu->selectedItem == 0) currentSubmenu->goLast();
+                else 
+                #endif 
+                   currentSubmenu->goPrevious();
+                
             break;
             case MENU_DOWN:
+                #ifdef ROLLOVER
+                if (currentSubmenu->selectedItem == maxCount -1)
+                   currentSubmenu->goFirst();
+                else
+                #endif
                 currentSubmenu->goNext();
             break;
             case MENU_SELECT:

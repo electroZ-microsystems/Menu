@@ -4,6 +4,8 @@
 #include "parameters.h"
 #include <AnalogKnob.h>
 
+#define ROLLOVER //go to first when reatch end and go to last when reatch first
+
 // Events to control the menu navigation. This would typically be mapped to some buttons.
 typedef enum menu_event_t {NONE, MENU_UP, MENU_DOWN, MENU_SELECT, MENU_LEAVE} menu_event_t;
 
@@ -181,6 +183,9 @@ public:
   void goNext();
   
   void goPrevious();
+
+  void goLast();
+  void goFirst();
 
   bool isActivated() {return activated;};
   
