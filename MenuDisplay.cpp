@@ -1,4 +1,6 @@
 #include "MenuDisplay.h"
+#include "conf.h"
+
 
 void MenuDisplay::updateDisplay(Menu* currentMenu) {
   if (!currentMenu->needsRedraw()) return;
@@ -6,12 +8,26 @@ void MenuDisplay::updateDisplay(Menu* currentMenu) {
   //display->setTextSize(1);
   //display->setTextColor(WHITE);
   //display->clear();//Display();
+  #ifdef SSD128x32
+     display->setFont(Adafruit5x7);
+  #else
   //display->setFont(&FreeMonoBold9pt7b);
   display->setFont(Arial_bold_14);
+  #endif
+
+  #ifdef REVERSE
+     display->displayRemap(1);
+  #endif
+  display->setContrast(0);
+
   uint8_t startIndex = currentMenu->getScrollOffset();
   uint8_t active = currentMenu->getSelectedItem();
   for (int i=0; i<4; i++) { 
-    display->setCursor(0,i*2);
+    #ifdef SSD128x32
+       display->setCursor(0,i);
+    #else
+       display->setCursor(0,i*2);
+    #endif
     //display->clearToEOL();
     MenuItem* item = currentMenu->getItem(startIndex+i);
     display->setInvertMode(0);
@@ -31,7 +47,13 @@ void MenuDisplay::updateDisplay(Menu* currentMenu) {
         display->print("  ");
     }
     //display->setCursor(15,12+i*15);
-    display->setCursor(12,i*2);
+     
+    #ifdef SSD128x32
+       display->setCursor(12,i);
+    #else
+       display->setCursor(12,i*2);
+    #endif 
+    
     
     if (item!=NULL) {
         item->getText(buffer);

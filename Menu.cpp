@@ -1,5 +1,6 @@
 #include "Menu.h"
 
+
 bool MenuItem::update(menu_event_t event) {
     return false; // nothing to do - just return false
 };
@@ -12,6 +13,7 @@ bool SubMenuItem::update(menu_event_t event) {
     if (submenu!=NULL) {
         parent->goSubmenu(submenu);
     }
+    
     return false; // return false to leave activation state
 };
 
@@ -87,8 +89,8 @@ void Menu::leaveSubmenu() {
   }
   
 void Menu::goNext() {
-    if (selectedItem<maxCount-1) selectedItem++;
-    if (selectedItem-scrollOffset>3) scrollOffset=selectedItem-3;
+    if (selectedItem < maxCount-1) selectedItem++;
+    if (selectedItem-scrollOffset > 3) scrollOffset=selectedItem - 3;
   };
   
 void Menu::goPrevious() {
@@ -97,8 +99,9 @@ void Menu::goPrevious() {
   };
 
 void Menu::goLast() {
-    selectedItem=maxCount-1;
+    selectedItem= maxCount-1;
     if (selectedItem-scrollOffset>3) scrollOffset=selectedItem-3;
+    scrollOffset=selectedItem-3;
   };
 
 void Menu::goFirst() {
@@ -111,10 +114,14 @@ MenuItem* Menu::navigateMenu(menu_event_t event) {
     currentSubmenu->redraw=false; 
     if (currentSubmenu->activated) {
         currentSubmenu->activated = currentSubmenu->getCurrentItem()->update(event);
-        currentSubmenu->redraw = currentSubmenu->getCurrentItem()->needsRedraw(); 
+        currentSubmenu->redraw    = currentSubmenu->getCurrentItem()->needsRedraw(); 
         return currentSubmenu->getCurrentItem();
-    } else {
+    } 
+    else 
+    {
         currentSubmenu->redraw=true; 
+        /*if (event > 0)
+           Serial.println(String("maxCount=")+String(currentSubmenu->maxCount)+ String(" selected=")+String(currentSubmenu->selectedItem));*/
         switch(event) {
             case MENU_UP:
                 #ifdef ROLLOVER 
@@ -125,18 +132,25 @@ MenuItem* Menu::navigateMenu(menu_event_t event) {
                 
             break;
             case MENU_DOWN:
+                  
                 #ifdef ROLLOVER
-                if (currentSubmenu->selectedItem == maxCount -1)
-                   currentSubmenu->goFirst();
+                if (currentSubmenu->selectedItem == (currentSubmenu->maxCount -1))
+                    currentSubmenu->goFirst();    
+                
+                   
+
+                  
+                  
                 else
                 #endif
-                currentSubmenu->goNext();
+                   currentSubmenu->goNext();
             break;
             case MENU_SELECT:
                 if (currentSubmenu->getCurrentItem()!=NULL) {
                     // set parent to ensure correct return
                     currentSubmenu->getCurrentItem()->parent = currentSubmenu;
                     currentSubmenu->activated = currentSubmenu->getCurrentItem()->update(event);
+                    
                     return currentSubmenu->getCurrentItem();
                     
                 }

@@ -3,8 +3,9 @@
 #include <Arduino.h>
 #include "parameters.h"
 #include <AnalogKnob.h>
+#include "conf.h"
 
-#define ROLLOVER //go to first when reatch end and go to last when reatch first
+
 
 // Events to control the menu navigation. This would typically be mapped to some buttons.
 typedef enum menu_event_t {NONE, MENU_UP, MENU_DOWN, MENU_SELECT, MENU_LEAVE} menu_event_t;
@@ -154,6 +155,7 @@ private:
   uint8_t maxCount;
   Menu* parent;
   Menu* currentSubmenu;
+  
 
 public:
   /**
