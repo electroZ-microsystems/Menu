@@ -13,7 +13,6 @@ bool SubMenuItem::update(menu_event_t event) {
     if (submenu!=NULL) {
         parent->goSubmenu(submenu);
     }
-    
     return false; // return false to leave activation state
 };
 
@@ -29,9 +28,14 @@ bool ActionMenuItem::update(menu_event_t event) {
 
 bool ParamMenuItem::update(menu_event_t event) {
     if (event==MENU_LEAVE) {requestRedraw(); return false;} // nothing to do - just return false
+    //if (event==                                                                                                                MENU_SELECT) {requestRedraw(); return false;} // nothing to do - just return false
     if (event==MENU_UP) {parameter->increment();    requestRedraw();}
     if (event==MENU_DOWN) {parameter->decrement();  requestRedraw();}
-    
+    if (event==MENU_SELECT)
+    {
+       Serial.print("Action on ParamMenuIten\n");
+       Serial.println(selected);
+    }
     // check analog input
     if (knob!=NULL) {
         if (knob->hasChanged()) {
@@ -137,22 +141,28 @@ MenuItem* Menu::navigateMenu(menu_event_t event) {
                 if (currentSubmenu->selectedItem == (currentSubmenu->maxCount -1))
                     currentSubmenu->goFirst();    
                 
-                   
-
-                  
-                  
                 else
                 #endif
                    currentSubmenu->goNext();
             break;
             case MENU_SELECT:
+
+                #ifdef BUTTON_POLICY_3
+                if(String(currentSubmenu->getCurrentItem()->getName()) == String("back"))
+                {
+                   leaveSubmenu();
+                   currentSubmenu->redraw=true;
+                   return NULL;
+                }     
+                #endif  
+ 
                 if (currentSubmenu->getCurrentItem()!=NULL) {
                     // set parent to ensure correct return
                     currentSubmenu->getCurrentItem()->parent = currentSubmenu;
                     currentSubmenu->activated = currentSubmenu->getCurrentItem()->update(event);
-                    
+                    currentSubmenu->getCurrentItem()->select();
+
                     return currentSubmenu->getCurrentItem();
-                    
                 }
             break;
             case MENU_LEAVE:

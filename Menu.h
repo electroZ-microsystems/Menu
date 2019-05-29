@@ -24,14 +24,20 @@ class MenuItem {
 protected:
     char* name;
     bool redraw;
+    bool selected; //added by emmanuel
 public:
     Menu* parent;
     MenuItem(char* aname):
-        name(aname), parent(NULL) { };
+        name(aname), parent(NULL) , selected(false){ };
     /** getText
      * @brief returns the display text for this item
      * @param buffer: the destination array to write the text into (needs to be big enough to hold the text).
      */
+
+    select(){selected=true;};
+    unselect(){selected=false;};
+
+    String getName(){return String(name);};
     virtual void getText(char* buffer); 
     /** update
      * @brief arbitrary execution function for menu items, eg. parameter update. Subclasses should override this method.
@@ -174,6 +180,7 @@ public:
   uint8_t getScrollOffset();
 
   Menu* getParent();
+
   void setParent(Menu* newParent);
 
   Menu* getCurrentSubmenu();

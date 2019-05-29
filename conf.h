@@ -12,7 +12,7 @@
 #define REVERSE
 
 //Define button policy
-#define BUTTON_POLICY_4 //[UP] [SEL] [LEAVE] [DOWN]
-//#define BUTTON_POLICY_3 //[UP] [SEL/LEAVE] [DOWN]
-//#define BUTTON_POLICY_2 //[UP] [SEL/LEAVE]
-//#define BUTTON_POLICY_1  //single button  [1s SEL/LEAVE] [UP])
+//#define BUTTON_POLICY_4 //[UP] [SEL] [LEAVE] [DOWN]
+#define BUTTON_POLICY_3 //[UP] [SEL/LEAVE] [DOWN]
+//not implemented #define BUTTON_POLICY_2 //[UP] [SEL/LEAVE]
+//not implemented #define BUTTON_POLICY_1  //single button  [1s SEL/LEAVE] [UP])
