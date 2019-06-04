@@ -1,6 +1,16 @@
 #include "Menu.h"
 
+/*
 
+
+███╗   ███╗███████╗███╗   ██╗██╗   ██╗██╗████████╗███████╗███╗   ███╗
+████╗ ████║██╔════╝████╗  ██║██║   ██║██║╚══██╔══╝██╔════╝████╗ ████║
+██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║██║   ██║   █████╗  ██╔████╔██║
+██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║██║   ██║   ██╔══╝  ██║╚██╔╝██║
+██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝██║   ██║   ███████╗██║ ╚═╝ ██║
+╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝   ╚═╝   ╚══════╝╚═╝     ╚═╝
+
+*/
 bool MenuItem::update(menu_event_t event) {
     return false; // nothing to do - just return false
 };
@@ -9,6 +19,16 @@ void MenuItem::getText(char* buffer) {
     strcpy(buffer, name);
 }
 
+/*
+
+
+███████╗██╗   ██╗██████╗ ███╗   ███╗███████╗███╗   ██╗██╗   ██╗██╗████████╗███████╗███╗   ███╗
+██╔════╝██║   ██║██╔══██╗████╗ ████║██╔════╝████╗  ██║██║   ██║██║╚══██╔══╝██╔════╝████╗ ████║
+███████╗██║   ██║██████╔╝██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║██║   ██║   █████╗  ██╔████╔██║
+╚════██║██║   ██║██╔══██╗██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║██║   ██║   ██╔══╝  ██║╚██╔╝██║
+███████║╚██████╔╝██████╔╝██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝██║   ██║   ███████╗██║ ╚═╝ ██║
+╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝   ╚═╝   ╚══════╝╚═╝     ╚═╝
+*/
 bool SubMenuItem::update(menu_event_t event) {
     if (submenu!=NULL) {
         parent->goSubmenu(submenu);
@@ -16,6 +36,17 @@ bool SubMenuItem::update(menu_event_t event) {
     return false; // return false to leave activation state
 };
 
+
+/*
+
+
+ █████╗  ██████╗████████╗██╗ ██████╗ ███╗   ██╗███╗   ███╗███████╗███╗   ██╗██╗   ██╗██╗████████╗███████╗███╗   ███╗
+██╔══██╗██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║████╗ ████║██╔════╝████╗  ██║██║   ██║██║╚══██╔══╝██╔════╝████╗ ████║
+███████║██║        ██║   ██║██║   ██║██╔██╗ ██║██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║██║   ██║   █████╗  ██╔████╔██║
+██╔══██║██║        ██║   ██║██║   ██║██║╚██╗██║██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║██║   ██║   ██╔══╝  ██║╚██╔╝██║
+██║  ██║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝██║   ██║   ███████╗██║ ╚═╝ ██║
+╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝   ╚═╝   ╚══════╝╚═╝     ╚═╝
+*/
 bool ActionMenuItem::update(menu_event_t event) {
     if (callback!=NULL) {
         bool returnValue= callback(callbackArgument);
@@ -26,15 +57,28 @@ bool ActionMenuItem::update(menu_event_t event) {
     return false; // nothing to do - just return false
 };
 
+/*
+
+
+██████╗  █████╗ ██████╗  █████╗ ███╗   ███╗███╗   ███╗███████╗███╗   ██╗██╗   ██╗██╗████████╗███████╗███╗   ███╗
+██╔══██╗██╔══██╗██╔══██╗██╔══██╗████╗ ████║████╗ ████║██╔════╝████╗  ██║██║   ██║██║╚══██╔══╝██╔════╝████╗ ████║
+██████╔╝███████║██████╔╝███████║██╔████╔██║██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║██║   ██║   █████╗  ██╔████╔██║
+██╔═══╝ ██╔══██║██╔══██╗██╔══██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║██║   ██║   ██╔══╝  ██║╚██╔╝██║
+██║     ██║  ██║██║  ██║██║  ██║██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝██║   ██║   ███████╗██║ ╚═╝ ██║
+╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝   ╚═╝   ╚══════╝╚═╝     ╚═╝
+*/
+
 bool ParamMenuItem::update(menu_event_t event) {
     if (event==MENU_LEAVE) {requestRedraw(); return false;} // nothing to do - just return false
-    //if (event==                                                                                                                MENU_SELECT) {requestRedraw(); return false;} // nothing to do - just return false
+    //if (event==    MENU_SELECT) {requestRedraw(); return false;} // nothing to do - just return false
     if (event==MENU_UP) {parameter->increment();    requestRedraw();}
     if (event==MENU_DOWN) {parameter->decrement();  requestRedraw();}
     if (event==MENU_SELECT)
     {
        Serial.print("Action on ParamMenuIten\n");
-       Serial.println(selected);
+       Serial.println(parent->getCurrentSubmenu()->isActivated());
+       //delay(400);
+       //if (parent->activated)
     }
     // check analog input
     if (knob!=NULL) {
@@ -55,6 +99,14 @@ void ParamMenuItem::getText(char* buffer) {
     return buffer;
 }
 
+/*
+███╗   ███╗███████╗███╗   ██╗██╗   ██╗
+████╗ ████║██╔════╝████╗  ██║██║   ██║
+██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
+██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
+██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
+╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ 
+*/
 MenuItem* Menu::getCurrentItem() {
     return items[selectedItem];
   };
@@ -114,9 +166,28 @@ void Menu::goFirst() {
   };
 
 
+/*
+███╗   ███╗███████╗███╗   ██╗██╗   ██╗        ███╗   ██╗ █████╗ ██╗   ██╗██╗ ██████╗  █████╗ ████████╗███████╗███╗   ███╗███████╗███╗   ██╗██╗   ██╗
+████╗ ████║██╔════╝████╗  ██║██║   ██║        ████╗  ██║██╔══██╗██║   ██║██║██╔════╝ ██╔══██╗╚══██╔══╝██╔════╝████╗ ████║██╔════╝████╗  ██║██║   ██║
+██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║        ██╔██╗ ██║███████║██║   ██║██║██║  ███╗███████║   ██║   █████╗  ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
+██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║        ██║╚██╗██║██╔══██║╚██╗ ██╔╝██║██║   ██║██╔══██║   ██║   ██╔══╝  ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
+██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝        ██║ ╚████║██║  ██║ ╚████╔╝ ██║╚██████╔╝██║  ██║   ██║   ███████╗██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
+╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝         ╚═╝  ╚═══╝╚═╝  ╚═╝  ╚═══╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ 
+*/
 MenuItem* Menu::navigateMenu(menu_event_t event) {
     currentSubmenu->redraw=false; 
-    if (currentSubmenu->activated) {
+    if (currentSubmenu->activated) 
+    {
+        #ifdef BUTTON_POLICY_3
+        if (event == MENU_SELECT)
+        {
+           //leaveSubmenu();
+           currentSubmenu->redraw=true;
+           currentSubmenu->activated = false;
+           return currentSubmenu->getCurrentItem();
+        }
+        #endif   
+           
         currentSubmenu->activated = currentSubmenu->getCurrentItem()->update(event);
         currentSubmenu->redraw    = currentSubmenu->getCurrentItem()->needsRedraw(); 
         return currentSubmenu->getCurrentItem();
@@ -124,8 +195,8 @@ MenuItem* Menu::navigateMenu(menu_event_t event) {
     else 
     {
         currentSubmenu->redraw=true; 
-        /*if (event > 0)
-           Serial.println(String("maxCount=")+String(currentSubmenu->maxCount)+ String(" selected=")+String(currentSubmenu->selectedItem));*/
+        //if (event > 0)
+        //   Serial.println(String("maxCount=")+String(currentSubmenu->maxCount)+ String(" selected=")+String(currentSubmenu->selectedItem));
         switch(event) {
             case MENU_UP:
                 #ifdef ROLLOVER 
@@ -154,12 +225,24 @@ MenuItem* Menu::navigateMenu(menu_event_t event) {
                    currentSubmenu->redraw=true;
                    return NULL;
                 }     
-                #endif  
+                #endif 
+
+                if (currentSubmenu->activated)
+{
+                   leaveSubmenu();
+                   currentSubmenu->redraw=true;
+                   currentSubmenu->activated = false;
+                   return NULL;
+                }                        
  
                 if (currentSubmenu->getCurrentItem()!=NULL) {
                     // set parent to ensure correct return
                     currentSubmenu->getCurrentItem()->parent = currentSubmenu;
+                    //Serial.println("SELECT ...");
+                    //Serial.println(currentSubmenu->getCurrentItem()->getName());
+                    //Serial.println(String("before activated ->")+String(currentSubmenu->activated));
                     currentSubmenu->activated = currentSubmenu->getCurrentItem()->update(event);
+                    //Serial.println(String("after activated ->")+String(currentSubmenu->activated));
                     currentSubmenu->getCurrentItem()->select();
 
                     return currentSubmenu->getCurrentItem();

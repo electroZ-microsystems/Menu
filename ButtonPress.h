@@ -42,7 +42,7 @@ public:
      * @return True once after button release.
      */
     bool released(); 
-    
+      
     /**
      * @brief Current state of button.
      * @return True when pushed, false otherwise.
